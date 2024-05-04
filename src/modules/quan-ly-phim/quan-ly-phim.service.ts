@@ -59,7 +59,15 @@ export class QuanLyPhimService {
                     }
                 }
             })
-            let totalCount = await this.prisma.phim.count()
+            let totalCount = await this.prisma.phim.count({
+                where: {
+                    ten_phim: { contains: `${tenPhim}` },
+                    ngay_khoi_chieu: {
+                        gte: dateTuNgay.toISOString(),
+                        lt: dateDenNgay.toISOString()
+                    }
+                }
+            })
             let totalPages = Math.ceil(totalCount / soPhanTuTrenTrang)
             return {
                 currentPage: soTrang,
@@ -84,8 +92,8 @@ export class QuanLyPhimService {
             throw error
         }
     }
-        
-    async updateMovie() {}
+
+    async updateMovie() { }
 
     async delMovie(maPhim: number, type: any) {
         try {

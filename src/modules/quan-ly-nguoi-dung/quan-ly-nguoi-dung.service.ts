@@ -112,7 +112,7 @@ export class QuanLyNguoiDungService {
         skip: (soTrang - 1) * soPhanTuTrenTrang,
         include: { LoaiNguoiDung: true }
       })
-      let totalCount = await this.prisma.nguoiDung.count()
+      let totalCount = await this.prisma.nguoiDung.count({ where: { ho_ten: { contains: `${tuKhoa}` } } })
       let totalPages = Math.ceil(totalCount / soPhanTuTrenTrang)
       return {
         currentPage: soTrang,
