@@ -135,7 +135,7 @@ export class QuanLyNguoiDungService {
   async infoUser(type: any, taiKhoan: string) {
     try {
       if (type == 1) throw new BadRequestException('Bạn không đủ quyền truy cập!')
-      return this.prisma.nguoiDung.findMany({ where: { tai_khoan: { contains: `${taiKhoan}` } } })
+      return this.prisma.nguoiDung.findMany({ where: { tai_khoan: { contains: `${taiKhoan}` } }, include: { LoaiNguoiDung: true } })
     } catch (error) {
       throw error
     }
