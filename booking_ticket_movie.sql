@@ -109,7 +109,7 @@ CREATE TABLE `Phim` (
   `trailer` varchar(255) NOT NULL,
   `hinh_anh` varchar(255) DEFAULT NULL,
   `mo_ta` varchar(255) DEFAULT NULL,
-  `ngay_khoi_chieu` date DEFAULT NULL,
+  `ngay_khoi_chieu` datetime DEFAULT NULL,
   `danh_gia` int DEFAULT NULL,
   `hot` tinyint(1) DEFAULT NULL,
   `dang_chieu` tinyint(1) DEFAULT NULL,
@@ -188,11 +188,11 @@ INSERT INTO `NguoiDung` (`ma_nguoi_dung`, `ho_ten`, `email`, `so_dt`, `tai_khoan
 (6, 'Mai Văn Đoàn', 'mvdoan2001@gmail.com', '0969286240', 'mvdoan21', '$2b$10$Rqy15981u3Wy/0bHEHHcF.6OwtFyQmXw/KxIANfdPA.Ap01g.KbE.', 1, 0);
 
 INSERT INTO `Phim` (`ma_phim`, `ten_phim`, `trailer`, `hinh_anh`, `mo_ta`, `ngay_khoi_chieu`, `danh_gia`, `hot`, `dang_chieu`, `sap_chieu`, `isDelete`) VALUES
-(1, 'Avengers: Endgame', 'https://www.youtube.com/watch?app=desktop&v=ykBfss-8H4Y', 'avengers.jpg', 'Cuộc chiến cuối cùng của các siêu anh hùng', '2019-04-26', 10, 1, 1, 0, 0);
+(1, 'Avengers: Endgame', 'https://www.youtube.com/watch?app=desktop&v=ykBfss-8H4Y', 'avengers.jpg', 'Cuộc chiến cuối cùng của các siêu anh hùng', '2019-04-26 00:00:00', 10, 1, 1, 0, 0);
 INSERT INTO `Phim` (`ma_phim`, `ten_phim`, `trailer`, `hinh_anh`, `mo_ta`, `ngay_khoi_chieu`, `danh_gia`, `hot`, `dang_chieu`, `sap_chieu`, `isDelete`) VALUES
-(2, 'Spider-Man: No Way Home', 'https://www.youtube.com/watch?v=rZYVIK0R6sg', 'spiderman.jpg', 'Cuộc phiêu lưu mới của Spider-Man', '2021-12-17', 9, 1, 1, 0, 0);
+(2, 'Spider-Man: No Way Home', 'https://www.youtube.com/watch?v=rZYVIK0R6sg', 'spiderman.jpg', 'Cuộc phiêu lưu mới của Spider-Man', '2021-12-17 00:00:00', 9, 1, 1, 0, 0);
 INSERT INTO `Phim` (`ma_phim`, `ten_phim`, `trailer`, `hinh_anh`, `mo_ta`, `ngay_khoi_chieu`, `danh_gia`, `hot`, `dang_chieu`, `sap_chieu`, `isDelete`) VALUES
-(3, 'The Dark Knight', 'https://youtu.be/THXPCF6UHh8?si=jR6LlMjZL-d0oISx', 'darkknight.jpg', 'Cuộc chiến giữa Batman và Joker', '2008-07-18', 9, 0, 1, 0, 0);
+(3, 'The Dark Knight', 'https://youtu.be/THXPCF6UHh8?si=jR6LlMjZL-d0oISx', 'darkknight.jpg', 'Cuộc chiến giữa Batman và Joker', '2008-07-18 00:00:00', 9, 0, 1, 0, 0);
 
 INSERT INTO `RapPhim` (`ma_rap`, `ten_rap`, `ma_cum_rap`) VALUES
 (1, 'CGV District 1', 1);
