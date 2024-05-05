@@ -81,14 +81,25 @@ export class QuanLyPhimService {
         }
     }
 
-    async addMovie(file: any, type: any) {
+    async addMovie(file: any, type: any, phim: any) {
         try {
             if (type == 1) throw new BadRequestException('Bạn không đủ quyền truy cập!')
-            let imageMovie = {
-                hinh_anh: String(file.originalname)
+            let { tenPhim, trailer, moTa, ngayKhoiChieu, danhGia, hot, dangChieu, sapChieu } = phim
+            let dateNgayKhoiChieu = new Date(ngayKhoiChieu)
+            let newMovie = {
+                ten_phim: String(tenPhim),
+                trailer: String(trailer),
+                hinh_anh: String(file.originalname),
+                mo_ta: String(moTa),
+                ngay_khoi_chieu: dateNgayKhoiChieu.toISOString(),
+                danh_gia: Number(danhGia),
+                hot: Boolean(hot),
+                dang_chieu: Boolean(dangChieu),
+                sap_chieu: Boolean(sapChieu),
             }
-
+            return await this.prisma.phim.create({ data: newMovie })
         } catch (error) {
+            console.log(error)
             throw error
         }
     }

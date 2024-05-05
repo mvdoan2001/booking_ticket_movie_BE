@@ -1,4 +1,4 @@
-import { Controller, Delete, Get, Post, Query, Req, UploadedFile, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Post, Query, Req, UploadedFile, UseGuards } from '@nestjs/common';
 import { QuanLyPhimService } from './quan-ly-phim.service';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { ResponseMessage } from 'src/common/decorators/response.message-decorator';
@@ -39,7 +39,8 @@ export class QuanLyPhimController {
   @Upload()
   addMovie(@UploadedFile() file: any, @Req() req: Request) {
     let { type }: any = req.user
-    return this.quanLyPhimService.addMovie(file, type)
+    let phim: any = req.body
+    return this.quanLyPhimService.addMovie(file, type, phim)
   }
 
   @Post('CapNhatPhimUpload')

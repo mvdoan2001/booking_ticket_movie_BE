@@ -22,7 +22,7 @@ export const Upload = () => {
         })),
         ApiConsumes('multipart/form-data'),
         ApiBody({
-            type: FileUploadDto,
+            type: FileUploadDto
         })
     )
 }
