@@ -43,11 +43,13 @@ export class QuanLyPhimController {
     return this.quanLyPhimService.addMovie(file, type, phim)
   }
 
-  @Post('CapNhatPhimUpload')
-  @ResponseMessage('Xử lý thành công!')
-  @ApiBearerAuth()
-  @UseGuards(AuthGuard('jwt'))
-  updateMovie() { }
+  @Post('CapNhatPhimUpload')  
+  @Upload()
+  updateMovie(@UploadedFile() file: any, @Req() req: Request) {
+    let { type }: any = req.user
+    let phim: any = req.body
+    return this.quanLyPhimService.updateMovie(file, type, phim)
+  }
 
   @Delete('XoaPhim')
   @ResponseMessage('Xử lý thành công!')

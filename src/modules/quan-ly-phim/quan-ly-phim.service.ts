@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaClient } from '@prisma/client';
 
 @Injectable()
@@ -86,25 +86,50 @@ export class QuanLyPhimService {
             if (type == 1) throw new BadRequestException('Bạn không đủ quyền truy cập!')
             let { tenPhim, trailer, moTa, ngayKhoiChieu, danhGia, hot, dangChieu, sapChieu } = phim
             let dateNgayKhoiChieu = new Date(ngayKhoiChieu)
-            let newMovie = {
-                ten_phim: String(tenPhim),
-                trailer: String(trailer),
-                hinh_anh: String(file.originalname),
-                mo_ta: String(moTa),
-                ngay_khoi_chieu: dateNgayKhoiChieu.toISOString(),
-                danh_gia: Number(danhGia),
-                hot: Boolean(hot),
-                dang_chieu: Boolean(dangChieu),
-                sap_chieu: Boolean(sapChieu),
-            }
-            return await this.prisma.phim.create({ data: newMovie })
+            return await this.prisma.phim.create({
+                data: {
+                    ten_phim: String(tenPhim),
+                    trailer: String(trailer),
+                    hinh_anh: String(file.originalname),
+                    mo_ta: String(moTa),
+                    ngay_khoi_chieu: dateNgayKhoiChieu.toISOString(),
+                    danh_gia: Number(danhGia),
+                    hot: Boolean(hot),
+                    dang_chieu: Boolean(dangChieu),
+                    sap_chieu: Boolean(sapChieu),
+                }
+            })
+        } catch (error) {
+            throw error
+        }
+    }
+
+    async updateMovie(file: any, type: any, phim: any) {
+        try {
+            if (type == 1) throw new BadRequestException('Bạn không đủ quyền truy cập!')
+            let { tenPhim, trailer, moTa, ngayKhoiChieu, danhGia, hot, dangChieu, sapChieu } = phim
+            let data = await this.prisma.phim.findFirst({ where: { ten_phim: tenPhim } })
+            if(!data || data.isDelete) throw new NotFoundException('Không tìm thấy phim!')
+            let dateNgayKhoiChieu = new Date(ngayKhoiChieu)
+            return await this.prisma.phim.update({
+                where: { ma_phim: data.ma_phim },
+                data: {
+                    ... data,
+                    trailer: String(trailer),
+                    hinh_anh: String(file.originalname),
+                    mo_ta: String(moTa),
+                    ngay_khoi_chieu: dateNgayKhoiChieu.toISOString(),
+                    danh_gia: Number(danhGia),
+                    hot: Boolean(hot),
+                    dang_chieu: Boolean(dangChieu),
+                    sap_chieu: Boolean(sapChieu),
+                }
+            })
         } catch (error) {
             console.log(error)
             throw error
         }
     }
-
-    async updateMovie() { }
 
     async delMovie(maPhim: number, type: any) {
         try {

@@ -95,7 +95,7 @@ model Phim {
   trailer         String      @db.VarChar(255)
   hinh_anh        String?     @db.VarChar(255)
   mo_ta           String?     @db.VarChar(255)
-  ngay_khoi_chieu DateTime?   @db.Date
+  ngay_khoi_chieu DateTime?   @db.DateTime(0)
   danh_gia        Int?
   hot             Boolean?
   dang_chieu      Boolean?

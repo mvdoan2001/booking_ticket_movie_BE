@@ -12,7 +12,7 @@ export const Upload = () => {
         UseGuards(AuthGuard("jwt")),
         ApiBearerAuth(),
         ResponseMessage(mes),
-        UseInterceptors(FileInterceptor('file', {
+        UseInterceptors(FileInterceptor('hinhAnh', {
             storage: diskStorage({
                 destination: process.cwd() + "/public/img",
                 filename(req, file, callback) {
